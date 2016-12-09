@@ -1,2 +1,2 @@
 # agile-dummy-protocol
-Dummy Java Protocol Implementation for AGILE Gateway
+A dummy java protocol implementation for AGILE gateway
