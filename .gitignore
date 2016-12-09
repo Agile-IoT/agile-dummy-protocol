@@ -1,0 +1,15 @@
+deps
+/agile-interfaces/target/
+.settings/
+.classpath
+.project
+.log
+.metadata/
+.recommenders
+rocker
+*/*.log
+*.log
+nb*
+target
+/bin/
+
