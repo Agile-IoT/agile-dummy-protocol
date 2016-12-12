@@ -47,7 +47,32 @@
       <artifactId>agile-interfaces</artifactId>
       <version>1.0</version>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.freedesktop.dbus</groupId>
+      <artifactId>libdbus-java</artifactId>
+      <version>2.9</version>
+    </dependency>
+    <dependency>
+    	<groupId>cx.ath.matthew</groupId>
+    	<artifactId>io</artifactId>
+    	<version>0.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>cx.ath.matthew</groupId>
+    	<artifactId>unix</artifactId>
+    	<version>0.5</version>
+    </dependency>
+    <dependency>
+    	<groupId>cx.ath.matthew</groupId>
+    	<artifactId>hexdump</artifactId>
+    	<version>0.2</version>
+    </dependency>
+    <dependency>
+    	<groupId>cx.ath.matthew</groupId>
+    	<artifactId>cgi</artifactId>
+    	<version>0.6</version>
+    </dependency>
+    </dependencies>
   
   
   <build>
