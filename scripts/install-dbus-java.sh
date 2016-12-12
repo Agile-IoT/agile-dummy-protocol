@@ -110,6 +110,3 @@ mvn install:install-file -Dfile=$DEPS/io-0.1.jar \
                          -Dpackaging=jar \
                          -DgeneratePom=true \
                          -DlocalRepositoryPath=$DEPS
-echo "Still not running"
-END
-echo "Yay, finished without installing..."
