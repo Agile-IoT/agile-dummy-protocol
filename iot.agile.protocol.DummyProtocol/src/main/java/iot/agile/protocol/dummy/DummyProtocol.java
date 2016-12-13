@@ -128,7 +128,7 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
       logger.debug("Checking for new devices");
       if (deviceList.isEmpty()) {
         DeviceOverview deviceOverview = new DeviceOverview("00:11:22:33:44:55", AGILE_DUMMY_PROTOCOL_BUS_NAME,
-            "DUMMY_DEVICE", AVAILABLE);
+            "Dummy", AVAILABLE);
         deviceList.add(deviceOverview);
         logger.debug("Found new device {}",deviceOverview.id);
         try {
@@ -191,8 +191,8 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
    * @return
    */
   private byte[] generateRandomData(){
-    byte[] dummyData = new byte[4];
-    new Random().nextBytes(dummyData);
-    return dummyData;
+    byte[] dummyData = new byte[1];
+     new Random().nextBytes(dummyData);
+     return dummyData;
   }
 }
