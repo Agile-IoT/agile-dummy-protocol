@@ -50,4 +50,12 @@ COPY iot.agile.protocol.DummyProtocol iot.agile.protocol.DummyProtocol
 
 RUN cd iot.agile.protocol.DummyProtocol && mvn package
 
+FROM resin/raspberrypi3-openjdk:openjdk-8-jdk-20170217
+WORKDIR /usr/src/app
+ENV APATH /usr/src/app
+
+COPY --from=0 $APATH/scripts scripts
+COPY --from=0 $APATH/deps deps
+COPY --from=0 $APATH/iot.agile.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar iot.agile.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar
+
 CMD [ "bash", "/usr/src/app/scripts/start.sh" ]
