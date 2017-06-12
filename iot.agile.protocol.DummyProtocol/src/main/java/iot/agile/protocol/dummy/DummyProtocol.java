@@ -156,6 +156,7 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
   public void StopDiscovery() {
     if (discoveryFuture != null) {
       discoveryFuture.cancel(true);
+      discoveryFuture = null;
     }
   }
 
@@ -172,23 +173,26 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
   }
 
   public void Subscribe(String deviceAddress, Map<String, String> profile) throws DBusException {
-    Runnable task = () ->{
-      lastRecord = generateRandomData();
-      try {
-        Protocol.NewRecordSignal newRecordSignal = new Protocol.NewRecordSignal(AGILE_NEW_RECORD_SIGNAL_PATH,
-            lastRecord, deviceAddress, profile);
-        logger.debug("Notifying {}", this);
-        connection.sendSignal(newRecordSignal);
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-     };
-     subscriptionFuture = executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+    if(subscriptionFuture == null){
+      Runnable task = () ->{
+        lastRecord = generateRandomData();
+        try {
+          Protocol.NewRecordSignal newRecordSignal = new Protocol.NewRecordSignal(AGILE_NEW_RECORD_SIGNAL_PATH,
+              lastRecord, deviceAddress, profile);
+          logger.debug("Notifying {}", this);
+          connection.sendSignal(newRecordSignal);
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+       };
+       subscriptionFuture = executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+    }
   }
 
   public void Unsubscribe(String deviceAddress, Map<String, String> profile) throws DBusException {
     if(subscriptionFuture != null){
       subscriptionFuture.cancel(true);
+      subscriptionFuture = null;
     }
   }
 
