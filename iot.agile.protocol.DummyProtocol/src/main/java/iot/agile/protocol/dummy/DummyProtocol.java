@@ -53,7 +53,7 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
    */
   private static final String PROTOCOL_NAME = "Dummy Protocol";
 
-  private static final String RUNNING = "Running";
+  private static final String RUNNING = "RUNNING";
 
   private static final String DUMMY = "DUMMY";
    // Device status
