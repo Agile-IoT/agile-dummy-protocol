@@ -133,6 +133,11 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
   }
 
   public void StartDiscovery() throws DBusException {
+    if (discoveryFuture != null) {
+      logger.info("Discovery already running");
+      return;
+    }
+
     logger.info("Started discovery of Dummy devices");
     Runnable task = () -> {
       logger.debug("Checking for new devices");
