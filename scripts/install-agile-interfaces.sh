@@ -10,6 +10,8 @@
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
 
+set -e
+
 CURRDIR=`pwd`
 DEPS=${1:-$CURRDIR/deps}
 BUILD=$DEPS/build
@@ -28,16 +30,24 @@ if [ ! -e "$BUILD" ] ; then
   mkdir -p $BUILD
 fi
 
-if [ ! -e "$BUILD/agile-interfaces" ] ; then
+if [ ! -e "$BUILD/agile-api-spec" ] ; then
   cd $BUILD
   git clone https://github.com/Agile-IoT/agile-api-spec.git
-   cd agile-api-spec/agile-dbus-java-interface
-   chmod +x ./scripts/install-dependencies.sh
-   ./scripts/install-dependencies.sh
-   mvn package
-   cp target/agile-interfaces-1.0.jar $DEPS
+  cd agile-api-spec
+  git checkout add-write-execute
+  cd ..
+else
+  cd $BUILD/agile-api-spec
+  git checkout add-write-execute
+#  git pull
   cd ..
 fi
+
+cd agile-api-spec/agile-dbus-java-interface
+./scripts/install-dependencies.sh
+mvn package
+cp target/agile-interfaces-1.0.jar $DEPS
+cd ..
 
 cd $DEPS
 
