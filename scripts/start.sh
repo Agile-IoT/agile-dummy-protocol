@@ -73,7 +73,7 @@ mvn="mvn"
 
 if [ $MODULE = 'all' ] || [ $MODULE = 'Dummy' ]; then
   ./scripts/stop.sh "protocol.Dummy"
-   java -cp iot.agile.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar -Djava.library.path=deps:deps/lib iot.agile.protocol.dummy.DummyProtocol &
+   java -cp org.eclipse.agail.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar -Djava.library.path=deps:deps/lib org.eclipse.agail.protocol.dummy.DummyProtocol &
   echo "Started AGILE Dummy protocol"
 fi
 
