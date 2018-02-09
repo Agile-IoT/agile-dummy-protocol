@@ -34,11 +34,11 @@ if [ ! -e "$BUILD/agile-api-spec" ] ; then
   cd $BUILD
   git clone https://github.com/Agile-IoT/agile-api-spec.git
   cd agile-api-spec
-  git checkout add-write-execute
+  git checkout v0.1.7
   cd ..
 else
   cd $BUILD/agile-api-spec
-  git checkout add-write-execute
+  git checkout v0.1.7
 #  git pull
   cd ..
 fi
