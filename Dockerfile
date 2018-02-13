@@ -50,9 +50,9 @@ RUN CC=clang CXX=clang++ CMAKE_C_COMPILER=clang CMAKE_CXX_COMPILER=clang++ \
 scripts/install-agile-interfaces.sh $APATH/deps
 
 # copy directories into WORKDIR
-COPY iot.agile.protocol.DummyProtocol iot.agile.protocol.DummyProtocol
+COPY org.eclipse.agail.protocol.DummyProtocol org.eclipse.agail.protocol.DummyProtocol
 
-RUN cd iot.agile.protocol.DummyProtocol && mvn package
+RUN cd org.eclipse.agail.protocol.DummyProtocol && mvn package
 
 FROM $BASEIMAGE_DEPLOY
 WORKDIR /usr/src/app
@@ -60,6 +60,6 @@ ENV APATH /usr/src/app
 
 COPY --from=0 $APATH/scripts scripts
 COPY --from=0 $APATH/deps deps
-COPY --from=0 $APATH/iot.agile.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar iot.agile.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar
+COPY --from=0 $APATH/org.eclipse.agail.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar org.eclipse.agail.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar
 
 CMD [ "bash", "/usr/src/app/scripts/start.sh" ]

@@ -24,5 +24,5 @@ cd $CURRDIR
 sh ./scripts/install-dbus-java.sh $DEPS
 sh ./scripts/install-agile-interfaces.sh $DEPS
 
-cd iot.agile.protocol.DummyProtocol
+cd org.eclipse.agail.protocol.DummyProtocol
 mvn clean install -U

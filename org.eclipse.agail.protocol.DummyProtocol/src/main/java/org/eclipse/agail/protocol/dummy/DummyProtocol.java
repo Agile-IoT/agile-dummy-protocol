@@ -8,7 +8,7 @@
  * Contributors:
  *     Create-Net / FBK - initial API and implementation
  ******************************************************************************/
-package iot.agile.protocol.dummy;
+package org.eclipse.agail.protocol.dummy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,30 +23,30 @@ import org.freedesktop.dbus.exceptions.DBusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import iot.agile.Protocol;
-import iot.agile.ProtocolManager;
-import iot.agile.object.AbstractAgileObject;
-import iot.agile.object.DeviceOverview;
-import iot.agile.object.DeviceStatusType;
-import iot.agile.object.StatusType;
+import org.eclipse.agail.Protocol;
+import org.eclipse.agail.ProtocolManager;
+import org.eclipse.agail.object.AbstractAgileObject;
+import org.eclipse.agail.object.DeviceOverview;
+import org.eclipse.agail.object.DeviceStatusType;
+import org.eclipse.agail.object.StatusType;
 
 public class DummyProtocol extends AbstractAgileObject implements Protocol {
 
   private final Logger logger = LoggerFactory.getLogger(DummyProtocol.class);
 
-  private static final String AGILE_DUMMY_PROTOCOL_BUS_NAME = "iot.agile.protocol.Dummy";
+  private static final String AGILE_DUMMY_PROTOCOL_BUS_NAME = "org.eclipse.agail.protocol.Dummy";
 
-  private static final String AGILE_DUMMY_PROTOCOL_BUS_PATH = "/iot/agile/protocol/Dummy";
+  private static final String AGILE_DUMMY_PROTOCOL_BUS_PATH = "/org/eclipse/agail/protocol/Dummy";
 
   /**
    * DBus bus path for found new device signal
    */
-  private static final String AGILE_NEW_DEVICE_SIGNAL_PATH = "/iot/agile/NewDevice";
+  private static final String AGILE_NEW_DEVICE_SIGNAL_PATH = "/org/eclipse/agail/NewDevice";
 
   /**
    * DBus bus path for for new record/data reading
    */
-  private static final String AGILE_NEW_RECORD_SIGNAL_PATH = "/iot/agile/NewRecord";
+  private static final String AGILE_NEW_RECORD_SIGNAL_PATH = "/org/eclipse/agail/NewRecord";
 
   /**
    * Protocol name
