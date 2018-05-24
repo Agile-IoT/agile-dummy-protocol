@@ -216,4 +216,10 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
      new Random().nextBytes(dummyData);
      return dummyData;
   }
+
+@Override
+public Map<String, List<String>> GetSensors(String deviceAddress) throws DBusException {
+  // TODO Auto-generated method stub
+  return null;
+}
 }
