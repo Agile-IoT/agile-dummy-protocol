@@ -75,6 +75,17 @@ mvn="mvn"
 
 if [ $MODULE = 'all' ] || [ $MODULE = 'Dummy' ]; then
   ./scripts/stop.sh "protocol.Dummy"
+
+  # wait for ProtocolManager to initialize
+  while `! qdbus org.eclipse.agail.ProtocolManager > /dev/null`; do
+    echo "waiting for ProtocolManager to initialize";
+    sleep 1;
+  done
+
+  # Register Dummy in ProtocolManager
+  qdbus org.eclipse.agail.ProtocolManager /org/eclipse/agail/ProtocolManager org.eclipse.agail.ProtocolManager.Add Dummy
+
+
    java -cp org.eclipse.agail.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar -Djava.library.path=deps:deps/lib org.eclipse.agail.protocol.dummy.DummyProtocol &
   echo "Started AGILE Dummy protocol"
 fi
