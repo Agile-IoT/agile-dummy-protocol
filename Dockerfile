@@ -58,6 +58,11 @@ FROM $BASEIMAGE_DEPLOY
 WORKDIR /usr/src/app
 ENV APATH /usr/src/app
 
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    qdbus \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 COPY --from=0 $APATH/scripts scripts
 COPY --from=0 $APATH/deps deps
 COPY --from=0 $APATH/org.eclipse.agail.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar org.eclipse.agail.protocol.DummyProtocol/target/agile-dummy-protocol-1.0.0-jar-with-dependencies.jar
