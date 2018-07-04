@@ -75,6 +75,8 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
   private ScheduledFuture discoveryFuture;
   
   private ScheduledFuture subscriptionFuture;
+  
+  protected byte[] dataToWrite;
 
   // protected final State state = new State();
 
@@ -166,14 +168,23 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
       discoveryFuture = null;
     }
   }
-
+  
+  @Override
   public void Write(String deviceAddress, Map<String, String> profile, byte[] payload) throws DBusException {
+	  dataToWrite = payload;
+	  String s = new String(payload);
+	  logger.debug("[DummyProtocol] Write: {}", s);
   }
 
   public byte[] Read(String deviceAddress, Map<String, String> profile) throws DBusException {
-    lastRecord = generateRandomData();
-    return lastRecord;
-    }
+	  if(dataToWrite != null) {
+		  lastRecord = dataToWrite;
+		  dataToWrite = null;
+	  } else {
+		  lastRecord = generateRandomData();
+	  }
+	  return lastRecord;
+  }
 
   public byte[] NotificationRead(String deviceAddress, Map<String, String> profile) throws DBusException {
     return null;
@@ -182,7 +193,12 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
   public void Subscribe(String deviceAddress, Map<String, String> profile) throws DBusException {
     if(subscriptionFuture == null){
       Runnable task = () ->{
-        lastRecord = generateRandomData();
+        if(dataToWrite != null) {
+  		  lastRecord = dataToWrite;
+  		  dataToWrite = null;
+  	  	} else {
+  		  lastRecord = generateRandomData();
+  	  	}
         try {
           Protocol.NewRecordSignal newRecordSignal = new Protocol.NewRecordSignal(AGILE_NEW_RECORD_SIGNAL_PATH,
               lastRecord, deviceAddress, profile);
@@ -212,14 +228,9 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
    * @return
    */
   private byte[] generateRandomData(){
-    byte[] dummyData = new byte[1];
-     new Random().nextBytes(dummyData);
-     return dummyData;
+     int i = new Random().nextInt(1001);
+     logger.debug("Random number: {}", i);
+     return Integer.toString(i).getBytes();
   }
 
-@Override
-public Map<String, List<String>> GetSensors(String deviceAddress) throws DBusException {
-  // TODO Auto-generated method stub
-  return null;
-}
 }
