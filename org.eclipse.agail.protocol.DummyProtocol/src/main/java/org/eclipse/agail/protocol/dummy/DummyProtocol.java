@@ -31,6 +31,7 @@ import org.eclipse.agail.object.AbstractAgileObject;
 import org.eclipse.agail.object.DeviceOverview;
 import org.eclipse.agail.object.DeviceStatusType;
 import org.eclipse.agail.object.StatusType;
+import org.eclipse.agail.protocols.config.ProtocolConfig;
 
 public class DummyProtocol extends AbstractAgileObject implements Protocol {
 
@@ -216,4 +217,16 @@ public class DummyProtocol extends AbstractAgileObject implements Protocol {
      new Random().nextBytes(dummyData);
      return dummyData;
   }
+
+@Override
+public void SetConfiguration(List<ProtocolConfig> configs) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public List<ProtocolConfig> GetConfiguration() {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
